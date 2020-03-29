@@ -26,3 +26,17 @@ requests>=2.22.0
 ### Rate limits
 
 Be nice and don't hammer the ESI endpoints or you'll probably get rate limited
+
+### Example output
+
+Setting a waypoint should always return HTTP 204
+
+```
+Retrieving tokens from tokens.json
+Token is active
+Attemping to set destination to 30000140 (Status 204)
+Attemping to set destination to 30000143 (Status 204)
+Attemping to set destination to 30002789 (Status 204)
+
+Process finished with exit code 0
+```
