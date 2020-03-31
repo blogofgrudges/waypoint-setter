@@ -1,4 +1,5 @@
 import config
+import json
 import requests
 import tokens
 
@@ -20,6 +21,27 @@ def get_route():
     return data
 
 
+def analyse_route(route):
+    with open(config.SYSTEM_FILE, 'r') as system_file:
+        system_data = json.load(system_file)
+
+    cleaned_route_data = []
+    errors = []
+    for system_name in route:
+        if system_name not in system_data and system_name not in system_data.values():
+            errors.append(system_name)
+            continue
+
+        if system_name in system_data:
+            cleaned_route_data.append(system_data[system_name])
+        if system_name in system_data.values():
+            cleaned_route_data.append(system_name)
+
+    if errors:
+        raise ValueError(errors)
+    return cleaned_route_data
+
+
 def post_waypoint(params):
     waypoint_headers = {
         'Content-Type': 'application/json',
@@ -32,9 +54,19 @@ def post_waypoint(params):
 
 
 # do the magic
-token_data = tokens.get_tokens_from_file()
+try:
+    token_data = tokens.get_tokens_from_file()
+except Exception as e:
+    print(e.__str__())
+    raise SystemExit(1)
+
 access_token = token_data['access_token']
-route_data = get_route()
+
+try:
+    route_data = analyse_route(get_route())
+except ValueError as e:
+    print('Invalid system names/ids: ' + e.__str__())
+    raise SystemExit(1)
 
 for system in route_data:
     waypoint_params = {

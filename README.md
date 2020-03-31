@@ -11,7 +11,7 @@ Steps to make this work:
 3. Authenicate with your application manually on the character you want to use
 4. Generate an access token by following the instructions in the first half of [this article](https://developers.eveonline.com/blog/article/sso-to-authenticated-calls)
 5. Copy the access token, refresh token and refresh after timestamp into tokens.json
-6. Create your route in routes.txt
+6. Create your route from either solar system ids or names in routes.txt
 7. Install project requirements
 8. Run waypoints.py
 

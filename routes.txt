@@ -1,4 +1,6 @@
-; One system to a line! Lines starting with ; are skipped
+; One system to a line! Either system ids like '30000140' or exact names like 'Jita'. Lines starting with ; are skipped
+Jita
+TVN-FM
 30000140
 30000143
 30002789
